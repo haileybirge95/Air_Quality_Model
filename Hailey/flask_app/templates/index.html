@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Application</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Air Quality Prediction App</h1>
+        <form id="prediction-form">
+            <label for="feature1">Feature 1:</label>
+            <input type="text" id="feature1" name="feature1" required>
+            <label for="feature2">Feature 2:</label>
+            <input type="text" id="feature2" name="feature2" required>
+            <label for="feature3">Feature 3:</label>
+            <input type="text" id="feature3" name="feature3" required>
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('prediction-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    feature1: document.getElementById('feature1').value,
+                    feature2: document.getElementById('feature2').value,
+                    feature3: document.getElementById('feature3').value
+                })
+            });
+            const data = await response.json();
+            document.getElementById('result').innerText = 'Prediction: ' + data.prediction;
+        };
+    </script>
+</body>
+</html>
