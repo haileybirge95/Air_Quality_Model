@@ -113,17 +113,19 @@ let legend = L.control({position: 'bottomright'});
 // When the layer control is added, insert a div with the class of "legend".
 legend.onAdd = function() {
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [-0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5];
+        grades = [0, 1, 2, 3];
 
-    div.innerHTML += '<b>Color Map (F)<b><br>'
+    div.innerHTML += '<b>Air Quality<b><br>'
         // loop through our temperature intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
             '<i style="background:' + getColor(grades[i] + 0.1) + '"></i> ' +
-            grades[i].toFixed(1) + ((grades[i + 1]!=null) ? ' &ndash; ' + grades[i + 1].toFixed(1) + '<br>' : '+');
+            (grades[i] == 3 ? 'Hazardous' :
+            grades[i] == 2 ? 'Poor' :
+            grades[i] == 1 ? 'Moderate' : 'Good')  + '<br>';
     }
 
     return div;
 };
 // Add the info legend to the map.
-// legend.addTo(myMap);
+legend.addTo(myMap);
