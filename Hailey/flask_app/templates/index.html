@@ -3,41 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Application</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Air Quality Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="static/script.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Air Quality Prediction App</h1>
         <form id="prediction-form">
-            <label for="feature1">Feature 1:</label>
-            <input type="text" id="feature1" name="feature1" required>
-            <label for="feature2">Feature 2:</label>
-            <input type="text" id="feature2" name="feature2" required>
-            <label for="feature3">Feature 3:</label>
-            <input type="text" id="feature3" name="feature3" required>
+            <label for="Temperature">Temperature:</label>
+            <input type="range" id="Temperature" min="10" max="60" value="30" step="1">
+            <span id="Temperature-value">30</span><br>
+        
+            <label for="Humidity">Humidity:</label>
+            <input type="range" id="Humidity" min="30" max="130" value="80" step="1">
+            <span id="Humidity-value">80</span><br>
+        
+            <label for="PM2.5">PM2.5:</label>
+            <input type="range" id="PM2.5" min="0" max="300" value="150" step="1">
+            <span id="PM2.5-value">150</span><br>
+        
+            <label for="PM10">PM10:</label>
+            <input type="range" id="PM10" min="-1" max="320" value="160" step="1">
+            <span id="PM10-value">160</span><br>
+        
+            <label for="NO2">NO2:</label>
+            <input type="range" id="NO2" min="5" max="70" value="40" step="1">
+            <span id="NO2-value">40</span><br>
+        
+            <label for="SO2">SO2:</label>
+            <input type="range" id="SO2" min="-8" max="50" value="20" step="1">
+            <span id="SO2-value">20</span><br>
+        
+            <label for="CO">CO:</label>
+            <input type="range" id="CO" min="0" max="5" value="3" step="0.1">
+            <span id="CO-value">3</span><br>
+        
+            <label for="Proximity_to_Industrial_Areas">Proximity to Industrial Areas:</label>
+            <input type="range" id="Proximity_to_Industrial_Areas" min="0" max="30" value="15" step="1">
+            <span id="Proximity_to_Industrial_Areas-value">15</span><br>
+        
+            <label for="Population_Density">Population Density:</label>
+            <input type="range" id="Population_Density" min="180" max="1000" value="600" step="1">
+            <span id="Population_Density-value">600</span><br>
+        
             <button type="submit">Predict</button>
         </form>
-        <div id="result"></div>
-    </div>
 
-    <script>
-        document.getElementById('prediction-form').onsubmit = async function(event) {
-            event.preventDefault();
-            const response = await fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    feature1: document.getElementById('feature1').value,
-                    feature2: document.getElementById('feature2').value,
-                    feature3: document.getElementById('feature3').value
-                })
+        <h2 id="result"></h2>
+
+        <script>
+            // Update the displayed value when the PM2.5 slider is moved
+            $('#PM2.5').on('input', function() {
+                const value = $(this).val();
+                $('#PM2.5-value').text(value);
             });
-            const data = await response.json();
-            document.getElementById('result').innerText = 'Prediction: ' + data.prediction;
-        };
+
+            // Update the displayed value for all sliders
+            $('input[type="range"]').on('input', function() {
+                const value = $(this).val();
+                $(`#${this.id}-value`).text(value);
+            });
+
+            $('#prediction-form').on('submit', function(event) {
+                event.preventDefault();
+                const formData = {
+                    Temperature: parseFloat($('#Temperature').val()),  // Convert to float
+                    Humidity: parseFloat($('#Humidity').val()),      
+                    'PM2.5': parseFloat($('#PM2.5').val()),            
+                    PM10: parseFloat($('#PM10').val()),                
+                    NO2: parseFloat($('#NO2').val()),                 
+                    SO2: parseFloat($('#SO2').val()),                  
+                    CO: parseFloat($('#CO').val()),                     
+                    Proximity_to_Industrial_Areas: parseFloat($('#Proximity_to_Industrial_Areas').val()),
+                    Population_Density: parseInt($('#Population_Density').val()) // Convert to int
+                };
+
+            // Send the data to the Flask backend
+            $.ajax({
+                url: '/predict', // The endpoint where the data is sent
+                type: 'POST', // The type of request
+                contentType: 'application/json', // The content type of the request
+                data: JSON.stringify(formData), // Convert the formData object to a JSON string
+                success: function(response) {
+
+            // Display the prediction result
+            $('#result').text('Predicted Air Quality: ' + response.prediction);
+        }
+    });
+});
     </script>
 </body>
 </html>
