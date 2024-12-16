@@ -50,7 +50,7 @@ function states_style(feature) {
 
 function cbsa_style(feature) {
     return {
-        // fillColor: getColor(feature.properties.tempchg),
+        fillColor: getColor(feature.properties.CBSA_ID),
         weight: 2,
         opacity: 1,
         color: 'green',
@@ -60,13 +60,10 @@ function cbsa_style(feature) {
 }
 
 function getColor(d) {
-    return d > 2.5 ? '#800026' :
-           d > 2.0  ? '#BD0026' :
-           d > 1.5  ? '#E31A1C' :
-           d > 1.0  ? '#FC4E2A' :
-           d > 0.5   ? '#FD8D3C' :
-           d > 0.0   ? '#FEB24C' :
-           d > -0.5   ? '#FED976' :
+    return d >= 3 ? '#800026' :
+           d >= 2 ? '#E31A1C' :
+           d >= 1 ? '#FD8D3C' :
+           d >= 0 ? '#FED976' :
                       '#FFEDA0';
 }
 
