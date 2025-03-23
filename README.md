@@ -16,7 +16,11 @@ The significance of this application is that it provides an accessible, user fri
 The classification report and the confusion matrix that were used to assess the performance of the random forest model revealed strong accuracy and precision. The class with the least accuracy was the "Hazardous" class, with 16 false positives and 9 false negatives.
 | ![Alt text](https://i.imgur.com/BMvODtZ.png) | ![Alt text](https://i.imgur.com/wgo2JOi.png) |
 |----------------------------------|----------------------------------|
-
+### k-Nearest Neighbors
+The k-nearest neighbors model also yielded a high accuracy score, but there was a drop in recall for the "Moderate" and "Hazardous" classes, indicating the model was identifying less true positives.
+| ![Alt text](https://i.imgur.com/rIbvxJv.png) | ![Alt text](https://i.imgur.com/q9LJ9sZ.png) |
+|----------------------------------|----------------------------------|
+![Alt text](https://i.imgur.com/mrMTDQJ.png)
 
 
 To use the application, follow these steps:
