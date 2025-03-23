@@ -26,9 +26,9 @@ The k-nearest neighbors model also yielded a high accuracy score, but there was 
 A simple 3 layer Sequential model was created with L2 regularization to account for overfitting and softmax activation to accommodate the 4 classes. Random seeds were set to ensure random numbers generated will be the same so results can be replicated. This model performed very well, with high accuracy, precision and recall across classes. Visualizations showing the relationships between training and validation accuracy and loss over epochs provide further evidence that this is a strong model. These results made this the model of choice to power the air quality prediction application.
 | ![Alt text](https://i.imgur.com/BMvODtZ.png) | ![Alt text](https://i.imgur.com/n4rLQJT.png) |
 |----------------------------------|----------------------------------|
-## Final Result:
-![Alt text](https://i.imgur.com/Kw5YJWu.png)
-![Alt text](https://i.imgur.com/nYioddi.png)
+## The Air Quality Prediction Application with an example output: 
+| ![Alt text](https://i.imgur.com/Kw5YJWu.png) | ![Alt text](https://i.imgur.com/nYioddi.png) |
+|----------------------------------|----------------------------------|
 
 To use the application, follow these steps:
   1. Ensure that the Flask library is installed.
