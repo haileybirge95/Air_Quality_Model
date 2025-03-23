@@ -14,7 +14,7 @@ The significance of this application is that it provides an accessible, user fri
 ## Model Assessment:
 # Random Forest
 The classification report and the confusion matrix that were used to assess the performance of the random forest model revealed strong accuracy and precision. The class with the least accuracy was the "Hazardous" class, with 16 false positives and 9 false negatives.
-![rfclassificationreport.png](https://imgur.com/BMvODtZ)
+![Alt text](https://i.imgur.com/BMvODtZ.png)
 
 
 
