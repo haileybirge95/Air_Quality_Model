@@ -12,7 +12,7 @@ The significance of this application is that it provides an accessible, user fri
   2. Creating and testing the models (random forest, k-nearest neighbors, and neural network).
   4. Developing the air quality prediction application, which involved loading the chosen model and its scaler into the flask app and creating the sliding scales for the user to manipulate within the HTML and JS files.
 ## Model Assessment:
-# Random Forest
+### Random Forest
 The classification report and the confusion matrix that were used to assess the performance of the random forest model revealed strong accuracy and precision. The class with the least accuracy was the "Hazardous" class, with 16 false positives and 9 false negatives.
 | ![Alt text](https://i.imgur.com/BMvODtZ.png) | ![Alt text](https://i.imgur.com/wgo2JOi.png) |
 |----------------------------------|----------------------------------|
